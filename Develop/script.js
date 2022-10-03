@@ -17,19 +17,19 @@ function getRandomNumber(list) {
 
 function generatePassword() {
   var userChoice = window.prompt("Please choose a number between 8 and 128");
-  //Converting the users number into a integer//
+  //Converting the users choice into a integer//
   var passwordNumberLength = parseInt(userChoice);
   //If statement in case user tries to enter something that isn't a number//
   if (isNaN(userChoice)) {
     window.alert("Please choose a number");
-    return;
+    return generatePassword();
   }
 
   if (userChoice < 8 || userChoice > 128) {
     window.alert("Password length must be between 8 and 128 characters");
-    return;
+    return generatePassword();
   }
-  //Window confirms for user//
+  //Criteria options for user//
   var doYouWantNumbers = window.confirm(
     "Would you like to include numbers in your password?"
   );
@@ -132,7 +132,7 @@ function generatePassword() {
   var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   //Empty array that we will use to store the users selected criteria's//
   var userSelected = [];
-
+  //When user selects one of the choices it will be pushed into the userSelected array//
   if (doYouWantLower === true) {
     userSelected.push(lowerCase);
   }
@@ -156,6 +156,7 @@ function generatePassword() {
     doYouWantSymbols === false
   ) {
     window.alert("You must choose at least one option for your password");
+    return generatePassword();
   }
 
   var userPassword = "";
@@ -163,11 +164,24 @@ function generatePassword() {
   for (i = 0; i < passwordNumberLength; i++) {
     var randomL = getRandomNumber(userSelected);
     var random = getRandomNumber(randomL);
-    console.log(random);
+
     userPassword += random;
   }
 
-  window.alert(userPassword);
+  // window.alert(userPassword);
+  var confirm = window.confirm(
+    "Would you like to use this password: " + userPassword
+  );
+
+  if (confirm === false) {
+    var newPassword = window.confirm(
+      "Would you like to create a new password?"
+    );
+  }
+
+  if (newPassword === true) {
+    return generatePassword();
+  }
 }
 
 // Write password to the #password input
