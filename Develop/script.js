@@ -1,6 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
+//Functions for generating random numbers//
 function randomNumber(x, y) {
   if (!x) {
     x = y;
@@ -16,10 +16,10 @@ function getRandomNumber(list) {
 }
 
 function generatePassword() {
-  var userChoice = window.prompt("hello");
-
+  var userChoice = window.prompt("Please choose a number between 8 and 128");
+  //Converting the users number into a integer//
   var passwordNumberLength = parseInt(userChoice);
-
+  //If statement in case user tries to enter something that isn't a number//
   if (isNaN(userChoice)) {
     window.alert("Please choose a number");
     return;
@@ -29,7 +29,7 @@ function generatePassword() {
     window.alert("Password length must be between 8 and 128 characters");
     return;
   }
-
+  //Window confirms for user//
   var doYouWantNumbers = window.confirm(
     "Would you like to include numbers in your password?"
   );
@@ -130,7 +130,7 @@ function generatePassword() {
     "~",
   ];
   var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
+  //Empty array that we will use to store the users selected criteria's//
   var userSelected = [];
 
   if (doYouWantLower === true) {
@@ -159,16 +159,15 @@ function generatePassword() {
   }
 
   var userPassword = "";
-
+  //for loop that generates a random password with the length that the user chose//
   for (i = 0; i < passwordNumberLength; i++) {
     var randomL = getRandomNumber(userSelected);
-    var randomChar = getRandomNumber(randomL);
-    console.log(randomChar);
+    var random = getRandomNumber(randomL);
+    console.log(random);
+    userPassword += random;
   }
 
   window.alert(userPassword);
-
-  console.log(typeof userChoice);
 }
 
 // Write password to the #password input
